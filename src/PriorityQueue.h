@@ -60,6 +60,7 @@ namespace csi281 {
         // for HEAP-MAXIMUM()
         // NOTE: Our heap starts at 0, not 1
         T peek() {
+            return heap[0];
             // YOUR CODE HERE
         }
         
@@ -70,6 +71,12 @@ namespace csi281 {
         // NOTE: Do not worry about contracting the size of the backing vector
         // after a pop.
         T pop() {
+                T max = heap[0];    
+                heap[0] = heap[heapSize-1];
+                heapSize--;
+                maxHeapify(0);
+                return max;
+            
             // YOUR CODE HERE
         }
         
@@ -82,6 +89,21 @@ namespace csi281 {
         // NOTE: our last element is at heapSize after being push_back()ed onto
         // the end of the vector heap
         void push(T key) {
+                heapSize++;
+                heap.push_back(key);
+                int i = heapSize-1;
+  
+               // cout << "pushed: " << heap[i] << endl;
+                while (i > 0 && heap[parent(i)] < heap[i]) {
+                    swap(heap[i],heap[parent(i)]);
+                    i = parent(i); 
+                }
+
+
+              
+            
+           
+
             // YOUR CODE HERE
         }
         
@@ -104,6 +126,17 @@ namespace csi281 {
         // TIP: See pseudocode in Introduction to Algorithm Chapter 6 page 154
         // NOTE: Macros left() and right() are defined at the top of this file
         void maxHeapify(int i) {
+            int largest = i;
+            int l = left(i);
+            int r = right(i);
+            if (l <= heapSize && heap[l] > heap[i]) largest = l;
+            else largest = i;
+            if (r <= heapSize && heap[r] > heap[largest])largest = r;
+            if (largest != i) 
+            {
+                swap(heap[largest], heap[i]);
+                maxHeapify(largest);
+            }
             // YOUR CODE HERE
         }
         

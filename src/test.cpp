@@ -91,7 +91,7 @@ TEST_CASE( "PriorityQueue<string> test", "[PriorityQueue<string>]" ) {
     for (auto i : sampleStringArray1) {
         pq.push(i);
     }
-    
+    pq.debugPrint();
     REQUIRE( pq.getCount() == length );
     REQUIRE( pq.peek() == *max_element(begin(sampleStringArray1), end(sampleStringArray1)) );
     
@@ -131,7 +131,6 @@ TEST_CASE( "random PriorityQueue<int> test", "[rand PriorityQueue<int>]" ) {
         int i = sampleIntArray1[j];
         pq.push(i);
     }
-    
     REQUIRE( pq.getCount() == length );
     REQUIRE( pq.peek() == *max_element(sampleIntArray1, sampleIntArray1 + length) );
     
